@@ -67,7 +67,7 @@ $(function() {
     	var div = $(this);
     	var divHtml = $(this).html();
     	var width = div.width();
-    	var editableText = $("<input type='text' data-rnum="+div.parent().data('rnum')+"/>").css('width', width);
+    	var editableText = $("<input type='text' data-rnum="+div.parent().data('rnum')+" />").css('width', width);
     	editableText.val(divHtml);
     	$(this).replaceWith(editableText);
     	editableText.focus();
@@ -77,8 +77,10 @@ $(function() {
 
 	function editableTextBlurred() {
 	    var html = $(this).val();
+		var parent = localStorage.getItem($(this).data('rnum'));
 	    var viewableText = $('<div class="title">Title</div>');
 	    viewableText.html(html);
+		localStorage.setItem($(this).data('rnum'), parent.replace(/\<div class\=\"title\"\>.*\<\/div\>/, '<div class="title">'+html+'</div>'));
 	    $(this).replaceWith(viewableText);
 
 	    // setup the click event for this new div
