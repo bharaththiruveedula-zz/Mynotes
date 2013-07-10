@@ -4,7 +4,6 @@ $(function() {
 	$('.draggable').resizable({minHeight:150,minWidth:150});
 	var newnote = '<div class="draggable" data-rnum class="ui-widget-content"><div class="title">Title</div><div class="content"></div></div>';
 	$('#newnote').on('click', function(){
-		addEvent();
 		var set = 0;
 		var randomnumber = 0;
 		while(set === 0) {
@@ -17,6 +16,7 @@ $(function() {
 				localStorage.setItem("notes", localStorage.getItem("notes")+randomnumber+",");
 				localStorage.setItem(randomnumber, nn); 
 				$('#drop').append(nn);
+				addEvent();
 			}
 			else
 				continue;
