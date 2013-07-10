@@ -46,7 +46,7 @@ $(function() {
     	var divHtml = $(this).html();
     	var width = div.width();
     	console.log(width);
-    	var editableText = $("<textarea class='ct'/>").css('width', width);
+    	var editableText = $("<textarea class='ct' data-rnum="+div.parent().data('rnum')+" />" ).css('width', width);
     	editableText.val(divHtml);
     	$(this).replaceWith(editableText);
     	editableText.focus();
@@ -56,8 +56,10 @@ $(function() {
 
 	function contentTextBlurred() {
 	    var html = $(this).val();
+		var parent = localStorage.getItem($(this).data('rnum'));
 	    var viewableText = $('<div class="content"></div>');
 	    viewableText.html(html);
+		localStorage.setItem($(this).data('rnum'), parent.replace(/\<div class\=\"content\"\>.*\<\/div\>/, '<div class="content">'+html+'</div>'));
 	    $(this).replaceWith(viewableText);
 	    // setup the click event for this new div
 	    viewableText.click(contentClicked);
@@ -80,7 +82,7 @@ $(function() {
 		var parent = localStorage.getItem($(this).data('rnum'));
 	    var viewableText = $('<div class="title">Title</div>');
 	    viewableText.html(html);
-		localStorage.setItem($(this).data('rnum'), parent.replace(/\<div class\=\"title\"\>.*\<\/div\>/, '<div class="title">'+html+'</div>'));
+		localStorage.setItem($(this).data('rnum'), parent.replace($(parent).find('.title').html(), html));
 	    $(this).replaceWith(viewableText);
 
 	    // setup the click event for this new div
@@ -92,6 +94,12 @@ $(function() {
 		if(localStorage.getItem("notes") === null){
 			console.log("New User!");
 			localStorage.setItem("notes","");
+		}
+		else {
+			var nums = localStorage.getItem("notes").split(",");
+			for( var i=0;i<nums.length;i++) {
+				$('#drop').append(localStorage.getItem(parseInt(nums[i])));	
+			}
 		}
 	}
 });

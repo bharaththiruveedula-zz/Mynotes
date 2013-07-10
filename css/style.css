@@ -3,12 +3,13 @@
   	padding: 0px;
 }
 .draggable { 
-  width: 150px; 
-  height: 150px; 
-  background: #e3e3e3;  
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px; 
-
+  	width: 150px; 
+  	height: 150px; 
+  	background: #e3e3e3;  
+ 	border-top-left-radius: 5px;
+  	border-top-right-radius: 5px; 
+	float: left;
+	margin: 5px;
 }
 .navbar{
   margin-bottom: 0px;
@@ -22,8 +23,8 @@
 	text-shadow: 0 10px 0 #ffffff;
 }
 #drop {
-  width: inherit;
-	height: 700px;
+	width: inherit;
+    height: 700px;
 	padding: 20px;
 	background: #DEB887;
 }
